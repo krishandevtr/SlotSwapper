@@ -12,6 +12,8 @@ beforeAll(async () => {
 });
 
 beforeEach(async () => {
+
+  if(!mongoose.connection.db) return;
   const collections = await mongoose.connection.db.collections();
   for (const c of collections) {
     await c.deleteMany({});

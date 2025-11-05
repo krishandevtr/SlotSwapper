@@ -20,7 +20,10 @@ const io = new Server(server, {
 registerSocketHandlers(io);
 
 async function start() {
-  await mongoose.connect(MONGO_URI);
+  await mongoose.connect(MONGO_URI)
+    .then(() => console.log('Connected to MongoDB'))
+    .catch((err) => console.error('Failed to connect to MongoDB', err));
+
   server.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
   });
